@@ -13,7 +13,7 @@ The project simulates large-scale product and review workloads using the Amazon 
 
 The system consists of:
 
-- 🐘 CockroachDB multi-node cluster (range-based sharding + replication factor 3)
+- CockroachDB multi-node cluster (range-based sharding + replication factor 3)
 - FastAPI application gateway
 - Docker Compose orchestration
 - Locust for performance testing
