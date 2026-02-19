@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{{product.title}}</title>
+    <style>
+        body { background:#f8f8f8; font-family:Arial; padding:20px; }
+        .box { width:60%; margin:auto; background:white; padding:25px; border-radius:8px; }
+        .title { font-size:24px; font-weight:bold; color:#0077aa; }
+        .price { font-size:22px; color:#B12704; margin:10px 0; }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+    <div class="title">{{product.title}}</div>
+    <div><b>Brand:</b> {{product.brand}}</div>
+    <div><b>Category:</b> {{product.category}}</div>
+
+    <div class="price">
+        {% if product.price and product.price != "None" and product.price[0] == "$" %}
+            {{product.price}}
+        {% else %}
+            ${{product.price}}
+        {% endif %}
+    </div>
+
+    <p>{{product.description}}</p>
+
+    <hr>
+
+    <h3>Reviews</h3>
+    {% for r in reviews %}
+        <p><b>{{r.overall}}/5</b> – {{r.summary}}</p>
+        <p>{{r.reviewText}}</p>
+        <hr>
+    {% endfor %}
+</div>
+
+</body>
+</html>

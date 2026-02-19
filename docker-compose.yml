@@ -1,0 +1,152 @@
+version: "3.9"
+
+services:
+
+  cockroach1:
+    image: cockroachdb/cockroach:v24.3.12
+    command:
+      - start
+      - --insecure
+      - --advertise-addr=cockroach1
+      - --http-addr=0.0.0.0:8080
+      - --join=cockroach1,cockroach2,cockroach3,cockroach4,cockroach5,cockroach6,cockroach7,cockroach8,cockroach9
+    ports:
+      - "26257:26257"
+      - "8080:8080"
+    volumes:
+      - cockroach-data1:/cockroach/cockroach-data
+
+  cockroach2:
+    image: cockroachdb/cockroach:v24.3.12
+    command:
+      - start
+      - --insecure
+      - --advertise-addr=cockroach2
+      - --http-addr=0.0.0.0:8081
+      - --join=cockroach1,cockroach2,cockroach3,cockroach4,cockroach5,cockroach6,cockroach7,cockroach8,cockroach9
+    ports:
+      - "26258:26257"
+      - "8081:8081"
+    volumes:
+      - cockroach-data2:/cockroach/cockroach-data
+
+  cockroach3:
+    image: cockroachdb/cockroach:v24.3.12
+    command:
+      - start
+      - --insecure
+      - --advertise-addr=cockroach3
+      - --http-addr=0.0.0.0:8082
+      - --join=cockroach1,cockroach2,cockroach3,cockroach4,cockroach5,cockroach6,cockroach7,cockroach8,cockroach9
+    ports:
+      - "26259:26257"
+      - "8082:8082"
+    volumes:
+      - cockroach-data3:/cockroach/cockroach-data
+
+  cockroach4:
+    image: cockroachdb/cockroach:v24.3.12
+    command:
+      - start
+      - --insecure
+      - --advertise-addr=cockroach4
+      - --http-addr=0.0.0.0:8083
+      - --join=cockroach1,cockroach2,cockroach3,cockroach4,cockroach5,cockroach6,cockroach7,cockroach8,cockroach9
+    ports:
+      - "26260:26257"
+      - "8083:8083"
+    volumes:
+      - cockroach-data4:/cockroach/cockroach-data
+
+  cockroach5:
+    image: cockroachdb/cockroach:v24.3.12
+    command:
+      - start
+      - --insecure
+      - --advertise-addr=cockroach5
+      - --http-addr=0.0.0.0:8084
+      - --join=cockroach1,cockroach2,cockroach3,cockroach4,cockroach5,cockroach6,cockroach7,cockroach8,cockroach9
+    ports:
+      - "26261:26257"
+      - "8084:8084"
+    volumes:
+      - cockroach-data5:/cockroach/cockroach-data
+
+  cockroach6:
+    image: cockroachdb/cockroach:v24.3.12
+    command:
+      - start
+      - --insecure
+      - --advertise-addr=cockroach6
+      - --http-addr=0.0.0.0:8085
+      - --join=cockroach1,cockroach2,cockroach3,cockroach4,cockroach5,cockroach6,cockroach7,cockroach8,cockroach9
+    ports:
+      - "26262:26257"
+      - "8085:8085"
+    volumes:
+      - cockroach-data6:/cockroach/cockroach-data
+
+  cockroach7:
+    image: cockroachdb/cockroach:v24.3.12
+    command:
+      - start
+      - --insecure
+      - --advertise-addr=cockroach7
+      - --http-addr=0.0.0.0:8086
+      - --join=cockroach1,cockroach2,cockroach3,cockroach4,cockroach5,cockroach6,cockroach7,cockroach8,cockroach9
+    ports:
+      - "26263:26257"
+      - "8086:8086"
+    volumes:
+      - cockroach-data7:/cockroach/cockroach-data
+
+  cockroach8:
+    image: cockroachdb/cockroach:v24.3.12
+    command:
+      - start
+      - --insecure
+      - --advertise-addr=cockroach8
+      - --http-addr=0.0.0.0:8087
+      - --join=cockroach1,cockroach2,cockroach3,cockroach4,cockroach5,cockroach6,cockroach7,cockroach8,cockroach9
+    ports:
+      - "26264:26257"
+      - "8087:8087"
+    volumes:
+      - cockroach-data8:/cockroach/cockroach-data
+
+  cockroach9:
+    image: cockroachdb/cockroach:v24.3.12
+    command:
+      - start
+      - --insecure
+      - --advertise-addr=cockroach9
+      - --http-addr=0.0.0.0:8088
+      - --join=cockroach1,cockroach2,cockroach3,cockroach4,cockroach5,cockroach6,cockroach7,cockroach8,cockroach9
+    ports:
+      - "26265:26257"
+      - "8088:8088"
+    volumes:
+      - cockroach-data9:/cockroach/cockroach-data
+
+  fastapi:
+    build: ./fastapi_app
+    container_name: dist-fastapi
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://root@cockroach1:26257/distecomdb?sslmode=disable
+    depends_on:
+      - cockroach1
+    volumes:
+      - ./fastapi_app:/app
+
+volumes:
+  cockroach-data1:
+  cockroach-data2:
+  cockroach-data3:
+  cockroach-data4:
+  cockroach-data5:
+  cockroach-data6:
+  cockroach-data7:
+  cockroach-data8:
+  cockroach-data9:

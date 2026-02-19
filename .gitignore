@@ -1,0 +1,65 @@
+# -------------------------
+# Python
+# -------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# -------------------------
+# Environment Variables
+# -------------------------
+.env
+.env.*
+*.env
+
+# -------------------------
+# Logs
+# -------------------------
+*.log
+
+# -------------------------
+# OS Files
+# -------------------------
+.DS_Store
+Thumbs.db
+
+# -------------------------
+# IDE
+# -------------------------
+.vscode/
+.idea/
+
+# -------------------------
+# Docker
+# -------------------------
+docker-compose.override.yml
+
+# -------------------------
+# Large Files / Media
+# -------------------------
+*.mp4
+*.mov
+*.zip
+*.tar
+*.gz
+*.pdf
+
+# -------------------------
+# Database / Local volumes
+# -------------------------
+cockroach-data*/
+*.sqlite3
